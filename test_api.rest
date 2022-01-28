@@ -1,8 +1,14 @@
 ### LIST 10 articles from Space Flight News API
- GET https://api.spaceflightnewsapi.net/v3/articles HTTP/1.1
+ GET https://api.spaceflightnewsapi.net/v3/articles/count HTTP/1.1
 
 ### LANDING page 
  GET http://127.0.0.1:8000/ HTTP/1.1
+
+### LIST itens
+ GET http://127.0.0.1:8000/articles/?page_num=0&page_size=10 HTTP/1.1
+
+### GET item
+ GET http://127.0.0.1:8000/articles/10000 HTTP/1.1
 
 ### CREATE item
 POST http://127.0.0.1:8000/articles/ HTTP/1.1
@@ -33,7 +39,7 @@ Content-Type: application/json
   }
 
 ### UPDATE item
-PUT http://127.0.0.1:8000/articles/13788 HTTP/1.1
+PUT http://127.0.0.1:8000/articles/13765 HTTP/1.1
 Content-Type: application/json
 
   {
@@ -54,11 +60,5 @@ Content-Type: application/json
     ]
   }
 
-### GET item
- GET http://127.0.0.1:8000/articles/1 HTTP/1.1
-
-### LIST itens
- GET http://127.0.0.1:8000/articles/?page_num=0&page_size=1 HTTP/1.1
-
 ### DELETE item
-DELETE http://127.0.0.1:8000/articles/13789 HTTP/1.1
+DELETE http://127.0.0.1:8000/articles/13765 HTTP/1.1
