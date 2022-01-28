@@ -76,6 +76,6 @@ async def delete_article(id: int):
     delete_result = articles.delete_one({"id": id})
 
     if delete_result.deleted_count == 1:
-        return f"article ID: {id} was deleted."
+        return f"Article ID: {id} was deleted."
 
     raise HTTPException(status_code=404, detail=f"Article ID: {id} not found")
