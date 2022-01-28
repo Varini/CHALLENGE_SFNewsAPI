@@ -11,7 +11,7 @@ conn = MongoClient(config['CONNECT_STR'])
 
 db = conn.sfnewsDB
 
-articles = db["articles"]
+articles = db.articles
 
 def db_sync():
 
