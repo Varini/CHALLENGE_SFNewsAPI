@@ -47,47 +47,57 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 #
 Setup a Virtual Environment
-```
+```shell
 virtualenv venv
 ```
-For Linux/Mac
+Create a .env file according to the example
 ```
+ADMIN_USER=admin_user
+ADMIN_PASSWD=admin_pass
+DATABASE=database
+DOMAIN=domain
+
+RETRY_WRITES=true
+WRITE_CONCERN=majority
+
+CONNECT_STR=mongodb+srv://${ADMIN_USER}:${ADMIN_PASSWD}@${DOMAIN}/${DATABASE}?retryWrites=${RETRY_WRITES}&w=${WRITE_CONCERN}
+```
+For Linux/Mac
+```shell
 source venv/bin/activate
 ```
 For Windows
-```
+```shell
 source venv/Scripts/activate
 ```
 Install packages
-```
+```shell
 pip install -r .\requirements.txt
 ```
 Populate database
-```
+```shell
 python .\init_db.py
 ```
 Start server 
-```
+```shell
 uvicorn index:app --reload
 ```
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
-How to run the automated tests for this project.
-
-### Break down into end to end tests
-
-What these tests test and why.
-
+Install pytest
 ```
-Examples...
+pip install pytest
 ```
-
+Run pytest
+```
+python -m pytest
+```
 ## 🎈 Usage <a name="usage"></a>
 
 A brief explanatory video of this project: https://www.loom.com/share/
 
-You can check the API's documentation by accessing: http://localhost:8000/docs
+You can also check the API's documentation by accessing: http://localhost:8000/docs
 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
@@ -95,3 +105,4 @@ You can check the API's documentation by accessing: http://localhost:8000/docs
 - [Python](https://www.python.org/) - Programming Language
 - [MongoDB](https://www.mongodb.com/) - Database
 - [FastAPI](https://fastapi.tiangolo.com/) - API Framework
+- [PyTest](https://pytest.org/) - Test Framework
