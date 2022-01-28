@@ -5,7 +5,7 @@ from dotenv import dotenv_values, load_dotenv
 import json
 import requests
 
-config = dotenv_values("D:\Git\CHALLENGE_SFNewsAPI_DEV\.env")
+config = dotenv_values(".env")
 
 conn = MongoClient(config['CONNECT_STR'])
 
