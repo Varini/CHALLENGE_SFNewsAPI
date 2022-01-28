@@ -97,7 +97,7 @@ python -m pytest
 
 A brief explanatory video of this project: https://www.loom.com/share/ee82f13e62924a2faaaa6d7b7af21111
 
-After running the API, you can also check the its documentation by accessing: http://localhost:8000/docs
+After running the API, you can also check its documentation by accessing: http://localhost:8000/docs
 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
