@@ -1,0 +1,49 @@
+### LIST 10 articles from Space Flight News API
+ GET https://api.spaceflightnewsapi.net/v3/articles HTTP/1.1
+
+### LANDING page 
+ GET http://127.0.0.1:8000/ HTTP/1.1
+
+### CREATE item
+POST http://127.0.0.1:8000/articles/ HTTP/1.1
+Content-Type: application/json
+
+  {
+    "title": "Orbital Insertion Burn a Success, Webb Arrives at L4",
+    "url": "https://blogs.nasa.gov/webb/2022/01/24/orbital-insertion-burn-a-success-webb-arrives-at-l2/",
+    "imageUrl": "https://webb.nasa.gov/content/webbLaunch/assets/images/orbit/trajectoryMapping2.41-NoText-1800px.jpg",
+    "newsSite": "NASA",
+    "summary": "Today, at 2 p.m. EST, Webb fired its onboard thrusters for nearly five minutes (297 seconds) to complete the final postlaunch course correction to Webb’s trajectory. This mid-course correction burn inserted Webb toward its final orbit around the second Sun-Earth Lagrange point, or L2, nearly 1 million miles away from the Earth.",
+    "publishedAt": "2022-01-24T19:00:00.000Z",
+    "updatedAt": "2022-01-24T19:24:55.554Z",
+    "featured": true
+
+  }
+
+### UPDATE item
+PUT http://127.0.0.1:8000/articles/13752 HTTP/1.1
+Content-Type: application/json
+
+  {
+    "launches": [
+      {
+        "id": "Altered",
+        "launches": "!Altered Launch!"
+      }
+    ],
+    "events": [
+      {
+        "id": 1037,
+        "provider": "Altered Provider"
+      }
+    ]
+  }
+
+### GET item
+ GET http://127.0.0.1:8000/articles/13751 HTTP/1.1
+
+### LIST itens
+ GET http://127.0.0.1:8000/articles/?page_num=0&page_size=1 HTTP/1.1
+
+### DELETE item
+DELETE http://127.0.0.1:8000/articles/13752 HTTP/1.1
