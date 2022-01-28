@@ -19,7 +19,7 @@ app.on_event("startup")
 def init_scheduler():
     scheduler = BackgroundScheduler()
     scheduler.add_job(id="db_sync", func=db_sync, trigger="cron",
-                      hour="20", minute="51", second="00")
+                      hour="9", minute="00", second="00")
     scheduler.start()
 
 
