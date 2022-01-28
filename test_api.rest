@@ -16,19 +16,34 @@ Content-Type: application/json
     "summary": "Today, at 2 p.m. EST, Webb fired its onboard thrusters for nearly five minutes (297 seconds) to complete the final postlaunch course correction to Webb’s trajectory. This mid-course correction burn inserted Webb toward its final orbit around the second Sun-Earth Lagrange point, or L2, nearly 1 million miles away from the Earth.",
     "publishedAt": "2022-01-24T19:00:00.000Z",
     "updatedAt": "2022-01-24T19:24:55.554Z",
-    "featured": true
+    "featured": true,
+    "launches": [
+        {
+            "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            "provider": "Provider Title"
+        }
+    ],
+    "events": [
+        {
+            "id": 1037,
+            "provider": "Event Title"
+        }
+    ]     
 
   }
 
 ### UPDATE item
-PUT http://127.0.0.1:8000/articles/13752 HTTP/1.1
+PUT http://127.0.0.1:8000/articles/13788 HTTP/1.1
 Content-Type: application/json
 
   {
+    "title": "Altered Title",
+    "url": "www.domain.com",
+    "imageUrl": "IMAGE.img",    
     "launches": [
       {
         "id": "Altered",
-        "launches": "!Altered Launch!"
+        "provider": "Altered Launch"
       }
     ],
     "events": [
@@ -40,10 +55,10 @@ Content-Type: application/json
   }
 
 ### GET item
- GET http://127.0.0.1:8000/articles/13751 HTTP/1.1
+ GET http://127.0.0.1:8000/articles/1 HTTP/1.1
 
 ### LIST itens
  GET http://127.0.0.1:8000/articles/?page_num=0&page_size=1 HTTP/1.1
 
 ### DELETE item
-DELETE http://127.0.0.1:8000/articles/13752 HTTP/1.1
+DELETE http://127.0.0.1:8000/articles/13789 HTTP/1.1
