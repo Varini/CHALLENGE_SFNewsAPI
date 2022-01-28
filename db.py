@@ -1,9 +1,10 @@
+import json
+import ctypes
+import requests
+
 from bson import ObjectId
 from pymongo import MongoClient
 from dotenv import dotenv_values, load_dotenv
-
-import json
-import requests
 
 config = dotenv_values(".env")
 
@@ -13,55 +14,63 @@ db = conn.sfnewsDB
 
 articles = db.articles
 
+def Mbox(title, text, style):
+    return ctypes.windll.user32.MessageBoxW(0, text, title, style)
+
 def db_sync():
 
-    print("Syncing Articles...")
+    try:
 
-    sync = 1
+        print("Syncing Articles...")
 
-    start = 0
+        sync = 1
 
-    articles_collec = []
+        start = 0
 
-    last_id = 0
-    if articles.find_one() is not None:
-        last_id = (articles.find().limit(1).sort("_id", -1))[0]["id"]
+        articles_collec = []
 
-    request = requests.get(
-        "https://api.spaceflightnewsapi.net/v3/articles/count")
+        last_id = 0
+        if articles.find_one() is not None:
+            last_id = (articles.find().limit(1).sort("_id", -1))[0]["id"]
 
-    total_articles = int(request.content.decode('utf-8'))
+        request = requests.get(
+            "https://api.spaceflightnewsapi.net/v3/articles/count")
 
-    while sync:
-        r = requests.get(
-            f"https://api.spaceflightnewsapi.net/v3/articles?_start={start}&_limit={total_articles // 100}"
-        )
-        documents = json.loads(r.text)
+        total_articles = int(request.content.decode('utf-8'))
 
-        for doc in list(documents):
-            article = articles.find_one({"title": doc.get("title"), "url": doc.get("url"), "imageUrl": doc.get("imageUrl"), 
-                                         "newsSite": doc.get("newsSite"), "summary": doc.get("summary"), 
-                                         "publishedAt": doc.get("publishedAt")})
+        while sync:
+            r = requests.get(
+                f"https://api.spaceflightnewsapi.net/v3/articles?_start={start}&_limit={total_articles // 100}"
+            )
+            documents = json.loads(r.text)
 
-            if article == None:
-                last_id += 1
-                doc["id"] = last_id
-                articles_collec.append(doc)
-                print(f'Inserting new article "{doc.get("title")}"...')
-            else:
-                articles_tosync = len(articles_collec)
+            for doc in list(documents):
+                article = articles.find_one({"title": doc.get("title"), "url": doc.get("url"), "imageUrl": doc.get("imageUrl"), 
+                                            "newsSite": doc.get("newsSite"), "summary": doc.get("summary"), 
+                                            "publishedAt": doc.get("publishedAt")})
 
-                if articles_tosync != 0:
-                    print(f"Total of articles to sync: {articles_tosync}")
-
-                    articles.insert_many(articles_collec)
-
-                    print("Synchronization completed!")
+                if article == None:
+                    last_id += 1
+                    doc["id"] = last_id
+                    articles_collec.append(doc)
+                    print(f'Inserting new article "{doc.get("title")}"...')
                 else:
-                    print("No sync needed.")
+                    articles_tosync = len(articles_collec)
 
-                sync = 0
+                    if articles_tosync != 0:
+                        print(f"Total of articles to sync: {articles_tosync}")
 
-                break
+                        articles.insert_many(articles_collec)
 
-        start += total_articles // 100
+                        print("Synchronization completed!")
+                    else:
+                        print("No sync needed.")
+
+                    sync = 0
+
+                    break
+
+            start += total_articles // 100
+
+    except Exception as error:
+        Mbox('Synchronization failed!', 'Some failure occurred while syncing articles.', 0)        
