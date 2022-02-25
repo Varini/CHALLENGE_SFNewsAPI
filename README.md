@@ -66,10 +66,6 @@ For Linux/Mac
 ```shell
 source venv/bin/activate
 ```
-For Windows
-```shell
-venv/Scripts/activate
-```
 Install packages
 ```shell
 pip install -r .\requirements.txt
