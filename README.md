@@ -68,7 +68,7 @@ source venv/bin/activate
 ```
 For Windows
 ```shell
-source venv/Scripts/activate
+venv/Scripts/activate
 ```
 Install packages
 ```shell
